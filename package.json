@@ -4,7 +4,7 @@
   "description": "Custom simple for to use insteam of browser form",
   "main": "CustomForm.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No tests here\""
   },
   "repository": {
     "type": "git",
