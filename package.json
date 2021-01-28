@@ -1,5 +1,5 @@
 {
-  "name": "@schirrel/CustomForm",
+  "name": "@schirrel/custom-form",
   "version": "0.0.1",
   "description": "Custom simple for to use insteam of browser form",
   "main": "CustomForm.js",
