@@ -1,0 +1,27 @@
+{
+  "name": "@schirrel/CustomForm",
+  "version": "0.0.1",
+  "description": "Custom simple for to use insteam of browser form",
+  "main": "CustomForm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schirrel/CustomForm.git"
+  },
+  "keywords": [
+    "html",
+    "js",
+    "form"
+  ],
+  "author": "schirrel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schirrel/CustomForm/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://github.com/schirrel/CustomForm#readme"
+}

@@ -1,4 +1,5 @@
 export const isUndefined = (obj, _undefined) => obj == _undefined;
+export const isDefined = (obj, _undefined) => obj !== _undefined;
 export const isString = (value) => typeof value === "string";
 
 export default class CustomForm {
@@ -16,6 +17,10 @@ export default class CustomForm {
       args.fields
         .filter((f) => f.required)
         .map((f) => (isString(f) ? f : f.name));
+
+    this.customValidations =
+      args.customValidations || args.fields.filter((f) => f.validation);
+
     this.fields = args.fields.map((f) => (isString(f) ? f : f.name));
     for (let f = 0; f < this.requiredFields.length; f++) {
       this[this.requiredFields[f]] = null;
@@ -55,6 +60,28 @@ export default class CustomForm {
     }
   }
 
+  invalidateCustomValidations() {
+    if (!this.customValidations) return;
+    for (let v = 0; v < this.customValidations.length; v++) {
+      if (
+        this[this.customValidations[v].name] != null &&
+        isDefined(this[this.customValidations[v].name])
+      ) {
+        if (
+          this.customValidations[v].validation(
+            this[this.customValidations[v].name]
+          )
+        ) {
+          this.invalid[this.customValidations[v].name] = true;
+          this.createInvalidMessage(
+            document.querySelector("#" + this.customValidations[v].name),
+            this.customValidations[v].validationMessage
+          );
+        }
+      }
+    }
+  }
+
   fulfill(model) {
     this.fields.forEach((f) => {
       this[f] = model[f];
@@ -63,7 +90,8 @@ export default class CustomForm {
   invalidate() {
     this.invalid = {};
     this.invalidateRequireds();
-    // TODO ADD Custom Validations other than required and required that are conditionals
+    this.invalidateCustomValidations();
+    // TODO ADD required that are conditionals
   }
 
   convert() {
@@ -89,13 +117,13 @@ export default class CustomForm {
     } else this.submit(this.convert());
   }
   //For some bloddy reason this shit isnot working anymore had to change name
- /*  submit() {
-    console.log("Hit submit");
-    this.clear();
-    this.invalidate();
-    console.log(this.convert());
-    if (Object.keys(this.invalid).length) {
-      return;
-    } else this.submit(this.convert());
-  } */
+  /*  submit() {
+      console.log("Hit submit");
+      this.clear();
+      this.invalidate();
+      console.log(this.convert());
+      if (Object.keys(this.invalid).length) {
+        return;
+      } else this.submit(this.convert());
+    } */
 }
