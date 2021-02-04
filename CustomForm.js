@@ -108,20 +108,16 @@ export default class CustomForm {
       .forEach((e) => e.parentNode.removeChild(e));
   }
   callSubmit() {
-    console.log("callSubmit");
     this.clear();
     this.invalidate();
-    console.log(this.convert());
     if (Object.keys(this.invalid).length) {
       return;
     } else this.submit(this.convert());
   }
   //For some bloddy reason this shit isnot working anymore had to change name
   /*  submit() {
-      console.log("Hit submit");
-      this.clear();
+       this.clear();
       this.invalidate();
-      console.log(this.convert());
       if (Object.keys(this.invalid).length) {
         return;
       } else this.submit(this.convert());
